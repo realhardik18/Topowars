@@ -76,6 +76,19 @@ def randomCountries(count):
     return countries
 
 
+def randomCities(count, country):
+    cities = []
+    while len(cities) != count:
+        countryi = randomCountry()
+        if countryi != country:
+            city = randomCity(countryi)
+            if city not in cities:
+                cities.append(city)
+    return cities
+
+
+#print(randomCities(3, 'India'))
+
 # random pic of country
 # captial func
 

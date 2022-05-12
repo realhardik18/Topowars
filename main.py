@@ -6,7 +6,7 @@ from discord_ui import Components, UI, SelectMenu, SelectOption, Button
 import random
 import os
 import asyncio
-from funcs import randomCountry, randomPicOfCountry, randomCountries
+from funcs import randomCity, randomCountry, randomPicOfCountry, randomCountries, randomCities
 from appwriteFuncs import checkExistence, makeUser, updateScore
 import creds
 
@@ -46,7 +46,7 @@ async def create(ctx):
         await ctx.send('made account!')
 
 
-@ client.command()
+@client.command()
 async def country(ctx):
     if checkExistence(ctx.author.id):
         correct_option = 'z'
@@ -95,6 +95,46 @@ async def country(ctx):
     # work on reaction like system to get option
 
 
+@ client.command()
+async def city(ctx):
+    if checkExistence(ctx.author.id):
+        correct_option = 'z'
+        countryChosen = randomCountry()
+        correct_city = randomCity(countryChosen)
+        city_options = randomCities(3, countryChosen)
+        city_options.append(correct_city)
+        # print(countryChosen)
+        options_letters = ['a', 'b', 'c', 'd']
+        emojis = ["🇦", "🇧", "🇨", "🇩"]
+        options = list()
+        random.shuffle(city_options)
+        pointer = 0
+        for city in city_options:
+            if city == correct_city:
+                correct_option = options_letters[pointer]
+            options.append(
+                f':regional_indicator_{options_letters[pointer]}: {city}')
+            pointer += 1
+        embeded = discord.Embed(title=f"Guess the city in the country of {countryChosen}!",
+                                description='Guess the country the image is related to!\n**YOU HAVE ONLY 5 SECONDS TO ANSWER, SO BE QUICK!!**', color=0x2ecc71)
+        embeded.add_field(name="Your Options",
+                          value='\n'.join(options), inline=False)
+        message = await ctx.send(embed=embeded)
+        for emoji in emojis:
+            await message.add_reaction(emoji)
+
+        def check(reaction, user):
+            return user == ctx.author and str(reaction.emoji) == emojis[options_letters.index(correct_option)]
+
+        try:
+            reaction, user = await client.wait_for('reaction_add', timeout=5.0, check=check)
+        except asyncio.TimeoutError:
+            await ctx.send(f'incorrect response! the answer was **{correct_city}**')
+        else:
+            updateScore(ctx.author.id, 100)
+            await ctx.send('correct answer! you have been given 50 points!')
+    else:
+        await ctx.send('you dont have an account yet!, use **!create** to make an account!')
 client.run(creds.bot_key)
 
 # imolemt method for quix thingy
