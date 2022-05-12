@@ -26,12 +26,7 @@ def commands():
 
 
 def run():
-    app.run(host='0.0.0.0', debug=True)
-
-
-def show_site():
-    t = Thread(target=run)
-    t.start()
+    app.run()
 
 
 run()
