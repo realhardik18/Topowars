@@ -25,11 +25,6 @@ def commands():
     return render_template("commands.html")
 
 
-def run():
-    app.run()
-
-
-run()
 # show user stats
 # country stats
 # home page

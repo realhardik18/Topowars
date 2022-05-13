@@ -3,7 +3,6 @@ import random
 import json
 import urllib.request
 from creds import api_key_pixbay
-import requests
 from PIL import Image
 import ast
 from bs4 import BeautifulSoup
