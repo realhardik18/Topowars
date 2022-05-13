@@ -19,7 +19,9 @@ ListOfCommands = ['t country']
 async def on_ready():
     print('im ready')
 
-
+@client.command()
+async def help(ctx):
+    await ctx.send('here are my commands!\nuse **t country** to play a game where you have to guess the country from a picture\n use **t city** to play a game where you have to guess which of the cities are in the given countr\n use **t create** to make an account!')
 @client.event
 async def on_message(message):
     # print(message.content)
@@ -86,7 +88,7 @@ async def country(ctx):
             updateScore(ctx.author.id, 100)
             await ctx.send('correct answer! you have been given 100 points!')
     else:
-        await ctx.send('you dont have an account yet!, use **!create** to make an account!')
+        await ctx.send('you dont have an account yet!, use **t create** to make an account!')
     # os.remove(f'{filename[0]}.jpg')
     # https://discordpy.readthedocs.io/en/latest/ext/commands/api.html?highlight=wait_for#discord.ext.commands.Bot.wait_for
     # work on reaction like system to get option
@@ -131,7 +133,7 @@ async def city(ctx):
             updateScore(ctx.author.id, 100)
             await ctx.send('correct answer! you have been given 50 points!')
     else:
-        await ctx.send('you dont have an account yet!, use **!create** to make an account!')
+        await ctx.send('you dont have an account yet!, use **t create** to make an account!')
 client.run(creds.bot_key)
 
 # imolemt method for quix thingy
