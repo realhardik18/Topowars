@@ -1,7 +1,8 @@
 from flask import Flask, render_template, request
 from threading import Thread
 import requests
-
+import creds
+import json
 app = Flask('')
 
 
@@ -17,7 +18,9 @@ def about():
 
 @app.route('/leaderboard')
 def leaderboard():
-    return render_template("leaderboard.html")
+    response = requests.get(creds.api_endpoint)
+    data = response.text
+    return render_template("leaderboard.html", data=response.text)
 
 
 @app.route('/commands')
