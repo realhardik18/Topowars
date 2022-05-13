@@ -25,7 +25,11 @@ async def help(ctx):
 
 @client.command()
 async def score(ctx):
-    await ctx.send(f'your score is {checkScore(ctx.author.id)}!!')
+    if checkExistence(str(ctx.author.id)):
+        await ctx.send(f'your score is {checkScore(ctx.author.id)}!!')
+    else:
+        await ctx.send('you dont have an account yet!, use **t create** to make an account!')
+        
 
 @client.event
 async def on_message(message):
