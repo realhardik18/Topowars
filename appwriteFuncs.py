@@ -50,6 +50,12 @@ def leaderBoard():
     sorted_leaderboard = collections.OrderedDict(leaderboard)
     return dict(sorted_leaderboard)
 
+def checkScore(id):
+    users = Users(client)
+    for user in users.list()['users']:
+        if user['$id'] == str(id):
+            return user['prefs']['points']    
+
 
 # print(leaderBoard())
 

@@ -5,7 +5,7 @@ import random
 import os
 import asyncio
 from funcs import randomCity, randomCountry, randomPicOfCountry, randomCountries, randomCities
-from appwriteFuncs import checkExistence, makeUser, updateScore
+from appwriteFuncs import checkExistence, makeUser, updateScore,checkScore
 import creds
 
 intents = discord.Intents().all()
@@ -21,7 +21,12 @@ async def on_ready():
 
 @client.command()
 async def help(ctx):
-    await ctx.send('here are my commands!\nuse **t country** to play a game where you have to guess the country from a picture\n use **t city** to play a game where you have to guess which of the cities are in the given countr\n use **t create** to make an account!')
+    await ctx.send('here are my commands!\nuse **t country** to play a game where you have to guess the country from a picture\n use **t city** to play a game where you have to guess which of the cities are in the given countr\n to check your score use **t score**\nuse **t create** to make an account!')
+
+@client.command()
+async def score(ctx):
+    await ctx.send(f'your score is {checkScore(ctx.author.id)}!!')
+
 @client.event
 async def on_message(message):
     # print(message.content)
