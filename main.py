@@ -1,8 +1,6 @@
 # from keep_alive import keep_alive
 import discord
 from discord.ext import commands
-from discord.ext.audiorec import NativeVoiceClient
-from discord_ui import Components, UI, SelectMenu, SelectOption, Button
 import random
 import os
 import asyncio
@@ -13,7 +11,6 @@ import creds
 intents = discord.Intents().all()
 client = commands.Bot(command_prefix="t ", intents=intents)
 client.remove_command('help')
-ui = UI(client)
 
 ListOfCommands = ['t country']
 
