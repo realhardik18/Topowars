@@ -6,12 +6,15 @@ import os
 import asyncio
 from funcs import randomCity, randomCountry, randomPicOfCountry, randomCountries, randomCities
 from appwriteFuncs import checkExistence, makeUser, updateScore,checkScore
+from appwrite.services.users import Users
+from appwrite.client import Client
 import creds
+import collections
 
 intents = discord.Intents().all()
 client = commands.Bot(command_prefix="t ", intents=intents)
 client.remove_command('help')
-
+clien = Client()
 ListOfCommands = ['t country']
 
 
@@ -124,7 +127,7 @@ async def city(ctx):
                 f':regional_indicator_{options_letters[pointer]}: {city}')
             pointer += 1
         embeded = discord.Embed(title=f"Guess the city in the country of {countryChosen}!",
-                                description='Guess the country the image is related to!\n**YOU HAVE ONLY 5 SECONDS TO ANSWER, SO BE QUICK!!**', color=0x2ecc71)
+                                description='**YOU HAVE ONLY 5 SECONDS TO ANSWER, SO BE QUICK!!**', color=0x2ecc71)
         embeded.add_field(name="Your Options",
                           value='\n'.join(options), inline=False)
         message = await ctx.send(embed=embeded)
@@ -139,10 +142,9 @@ async def city(ctx):
         except asyncio.TimeoutError:
             await ctx.send(f'incorrect response! the answer was **{correct_city}**')
         else:
-            updateScore(ctx.author.id, 100)
+            updateScore(ctx.author.id, 50)
             await ctx.send('correct answer! you have been given 50 points!')
     else:
         await ctx.send('you dont have an account yet!, use **t create** to make an account!')
-client.run(creds.bot_key)
 
-# imolemt method for quix thingy
+client.run(creds.bot_key)

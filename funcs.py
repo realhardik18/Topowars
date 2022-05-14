@@ -40,9 +40,6 @@ def flagOfCountry(country):
             urllib.request.urlretrieve(
                 "http://www.digimouth.com/news/media/2011/09/google-logo.jpg", "local-filename.jpg")
             return f"flag of {country} saved as {fileid}.png"
-            # work on this!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-# returns a random picture of the country
 
 
 def randomPicOfCountry(country):
@@ -61,7 +58,6 @@ def randomPicOfCountry(country):
                 file.write(chunk)
     return [filename, country]
 
-# returns n random country, where n is the input
 
 
 def randomCountries(count):
@@ -85,17 +81,3 @@ def randomCities(count, country):
                 cities.append(city)
     return cities
 
-
-#print(randomCities(3, 'India'))
-
-# random pic of country
-# captial func
-
-# randomPicOfCountry('india')
-# print(flagOfCountry(randomCountry()))
-# print(randomCountry())
-#print(randomPicOfCountry(randomCountry().replace(' ', '')))
-# print(randomCountries(5))
-
-# work on better ooics
-# print(randomPicOfCountry(randomCountry()))
