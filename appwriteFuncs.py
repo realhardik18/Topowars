@@ -41,15 +41,6 @@ def updateScore(id, points):
             curr_points = user['prefs']['points']
     result = users.update_prefs(str(id), {'points': curr_points+points})
 
-
-def leaderBoard():
-    leaderboard = dict()
-    users = Users(client)
-    for user in users.list()['users']:
-        leaderboard[user['name']] = user['prefs']['points']
-    sorted_leaderboard = collections.OrderedDict(leaderboard)
-    return dict(sorted_leaderboard)
-
 def checkScore(id):
     users = Users(client)
     for user in users.list()['users']:
